@@ -1,23 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
-}
+import RestaurantsScreen from '././Screens/Restaurants';
+import RestaurantDetailsScreen from '././Screens/RestaurantDetails';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+export default StackNavigator({
+  Restaurants: {
+    screen: RestaurantsScreen,
+    navigationOptions: ({ navigation }) => ({
+      headerTitle: 'Restaurants'
+    }),
   },
-});
+  RestaurantDetails: {
+    screen: RestaurantDetailsScreen,
+    navigationOptions: ({ navigation }) => ({
+      headerTitle: navigation.state.params.restaurant.title
+    }),
+  },
+}, { initialRouteName: 'Restaurants' });
